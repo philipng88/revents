@@ -38,6 +38,7 @@ export const EventDetailedInfo = ({ event }) => {
               size='tiny'
               content='Show Map'
               floated='right'
+              disabled
             />
           </Grid.Column>
         </Grid>
