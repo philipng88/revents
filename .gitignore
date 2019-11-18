@@ -3,3 +3,4 @@
 *.env
 .prettierrc
 package-reference.json
+firebase.js
