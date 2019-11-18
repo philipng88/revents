@@ -8,7 +8,7 @@ const SettingsNav = () => {
       <Menu vertical>
         <Header icon='user' attached inverted color='grey' content='Profile' />
         <Menu.Item as={NavLink} to='/settings/basic'>
-          Basics
+          Basic Info
         </Menu.Item>
         <Menu.Item as={NavLink} to='/settings/about'>
           About Me

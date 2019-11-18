@@ -10,7 +10,7 @@ const actions = { login, socialLogin };
 
 const LoginForm = ({ login, handleSubmit, error, socialLogin }) => {
   return (
-    <Form size='large' onSubmit={handleSubmit(login)} autoComplete='off'>
+    <Form size='large' onSubmit={handleSubmit(login)}>
       <Segment>
         <Field
           name='email'
