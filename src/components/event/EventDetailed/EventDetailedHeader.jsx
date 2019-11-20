@@ -21,7 +21,8 @@ export const EventDetailedHeader = ({
   isHost,
   isGoing,
   goingToEvent,
-  cancelGoingToEvent
+  cancelGoingToEvent,
+  loading
 }) => {
   return (
     <Segment.Group>
@@ -67,7 +68,11 @@ export const EventDetailedHeader = ({
                 Cancel My Place
               </Button>
             ) : (
-              <Button onClick={() => goingToEvent(event)} color='teal'>
+              <Button
+                onClick={() => goingToEvent(event)}
+                color='teal'
+                loading={loading}
+              >
                 JOIN THIS EVENT
               </Button>
             )}

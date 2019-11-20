@@ -28,8 +28,8 @@ const actions = { uploadProfileImage, deletePhoto, setMainPhoto };
 const mapState = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
-  photos: state.firestore.ordered.photos
-  // loading: state.async.loading
+  photos: state.firestore.ordered.photos,
+  loading: state.async.loading
 });
 
 const PhotosPage = ({
@@ -37,8 +37,8 @@ const PhotosPage = ({
   photos,
   profile,
   deletePhoto,
-  setMainPhoto
-  // loading
+  setMainPhoto,
+  loading
 }) => {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
@@ -112,14 +112,14 @@ const PhotosPage = ({
               />
               <Button.Group>
                 <Button
-                  // loading={loading}
+                  loading={loading}
                   onClick={handleUploadImage}
                   style={{ width: '100px' }}
                   positive
                   icon='check'
                 />
                 <Button
-                  // disabled={loading}
+                  disabled={loading}
                   onClick={handleCancelCrop}
                   style={{ width: '100px' }}
                   negative
@@ -136,6 +136,7 @@ const PhotosPage = ({
         profile={profile}
         deletePhoto={handleDeletePhoto}
         setMainPhoto={handleSetMainPhoto}
+        loading={loading}
       />
     </Segment>
   );
