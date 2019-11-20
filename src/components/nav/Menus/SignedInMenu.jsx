@@ -12,7 +12,12 @@ export const SignedInMenu = ({ signOut, profile, auth }) => {
       />
       <Dropdown pointing='top left' text={profile.displayName}>
         <Dropdown.Menu>
-          <Dropdown.Item text='Create Event' icon='plus' />
+          <Dropdown.Item
+            as={Link}
+            to={'/createEvent'}
+            text='Create Event'
+            icon='plus'
+          />
           <Dropdown.Item text='My Events' icon='calendar' />
           <Dropdown.Item text='My Network' icon='users' />
           <Dropdown.Item
