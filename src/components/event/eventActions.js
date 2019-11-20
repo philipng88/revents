@@ -66,7 +66,7 @@ export const getEventsForDashboard = lastEvent => async (
   dispatch,
   getState
 ) => {
-  // let today = new Date();
+  let today = new Date();
   const firestore = firebase.firestore();
   const eventsRef = firestore.collection('events');
   try {
@@ -82,12 +82,12 @@ export const getEventsForDashboard = lastEvent => async (
 
     lastEvent
       ? (query = eventsRef
-          // .where('date', '>=', today)
+          .where('date', '>=', today)
           .orderBy('date')
           .startAfter(startAfter)
           .limit(2))
       : (query = eventsRef
-          // .where('date', '>=', today)
+          .where('date', '>=', today)
           .orderBy('date')
           .limit(2));
 
@@ -114,5 +114,29 @@ export const getEventsForDashboard = lastEvent => async (
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError());
+  }
+};
+
+export const addEventComment = (eventId, values, parentId) => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  const profile = getState().firebase.profile;
+  const user = firebase.auth().currentUser;
+  let newComment = {
+    parentId,
+    displayName: profile.displayName,
+    photoURL: profile.photoURL || '/assets/user.png',
+    uid: user.uid,
+    text: values.comment,
+    date: Date.now()
+  };
+  try {
+    await firebase.push(`event_chat/${eventId}`, newComment);
+  } catch (error) {
+    console.log(error);
+    toastr.error('ERROR', 'There was an error adding the comment');
   }
 };
