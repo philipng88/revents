@@ -73,7 +73,11 @@ class EventDetailedPage extends Component {
       match
     } = this.props;
     const attendees =
-      event && event.attendees && objectToArray(event.attendees);
+      event &&
+      event.attendees &&
+      objectToArray(event.attendees).sort((a, b) => {
+        return a.joinDate.toDate() - b.joinDate.toDate();
+      });
     const isHost = event.hostUid === auth.uid;
     const isGoing =
       attendees && attendees.some(attendee => attendee.id === auth.uid);
