@@ -6,6 +6,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import EventActivity from '../EventActivity/EventActivity';
 import { firestoreConnect } from 'react-redux-firebase';
 import { getEventsForDashboard } from '../eventActions';
+// import TestComponent from '../../TestComponent.test';
 
 const query = [
   {
@@ -57,6 +58,8 @@ class EventDashboard extends Component {
     const { moreEvents, loadedEvents } = this.state;
     if (this.state.loadingInitial) return <LoadingComponent />;
     return (
+      // <>
+      // <TestComponent />
       <Grid>
         <Grid.Column width={10}>
           <div ref={this.contextRef}>
@@ -75,6 +78,7 @@ class EventDashboard extends Component {
           <Loader active={loading} />
         </Grid.Column>
       </Grid>
+      // </>
     );
   }
 }

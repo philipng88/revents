@@ -13,6 +13,7 @@ import {
 } from '../../../app/common/util/helpers';
 import { goingToEvent, cancelGoingToEvent } from '../../user/userActions';
 import { addEventComment } from '../eventActions';
+import { openModal } from '../../modals/modalActions';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -37,7 +38,12 @@ const mapState = (state, ownProps) => {
   };
 };
 
-const actions = { goingToEvent, cancelGoingToEvent, addEventComment };
+const actions = {
+  goingToEvent,
+  cancelGoingToEvent,
+  addEventComment,
+  openModal
+};
 
 class EventDetailedPage extends Component {
   async componentDidMount() {
@@ -58,7 +64,8 @@ class EventDetailedPage extends Component {
       cancelGoingToEvent,
       addEventComment,
       eventChat,
-      loading
+      loading,
+      openModal
     } = this.props;
     const attendees =
       event && event.attendees && objectToArray(event.attendees);
@@ -66,6 +73,7 @@ class EventDetailedPage extends Component {
     const isGoing =
       attendees && attendees.some(attendee => attendee.id === auth.uid);
     const chatTree = !isEmpty(eventChat) && createDataTree(eventChat);
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <Grid>
         <Grid.Column width={10}>
@@ -76,13 +84,17 @@ class EventDetailedPage extends Component {
             goingToEvent={goingToEvent}
             cancelGoingToEvent={cancelGoingToEvent}
             loading={loading}
+            authenticated={authenticated}
+            openModal={openModal}
           />
           <EventDetailedInfo event={event} />
-          <EventDetailedChat
-            addEventComment={addEventComment}
-            eventId={event.id}
-            eventChat={chatTree}
-          />
+          {authenticated && (
+            <EventDetailedChat
+              addEventComment={addEventComment}
+              eventId={event.id}
+              eventChat={chatTree}
+            />
+          )}
         </Grid.Column>
         <Grid.Column width={6}>
           <EventDetailedSidebar attendees={attendees} />

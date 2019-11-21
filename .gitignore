@@ -1,6 +1,7 @@
 /node_modules
 /build
 *.env
+TestComponent.test.js
 .prettierrc
 package-reference.json
 firebase.js
